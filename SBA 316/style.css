@@ -94,8 +94,7 @@
     content: none;
   }
   .card-carousel .inner-carousel > div.front {
-    background-color: #1C9577;
-    background-image: radial-gradient(circle 200px at center right, #2ABA96, #1C9577);
+    background-image: linear-gradient(to top right, #cd1524, #d1c9bf);
     color: #fff;
   }
   .card-carousel .inner-carousel > div.front a {
