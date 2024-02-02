@@ -1,13 +1,17 @@
 // Use the parent-child-sibling relationship to navigate between elements at least once (firstChild, lastChild, parentNode, nextElementSibling, etc.)
-//Create at least one element using createElement.
-// Use appendChild and/or prepend to add new elements to the DOM.
-// Use the DocumentFragment interface or HTML templating with the cloneNode method to create templated content. 
-// Modify the HTML or text content of at least one element in response to user interaction using innerHTML, innerText, or textContent.
 // Modify the style and/or CSS classes of an element in response to user interactions using the style or classList properties.
 // Modify at least one attribute of an element in response to user interaction.
-// Include at least one form and/or input with HTML attribute validation.
 
 function cardCarousel3d(carousels){
+    var cardTemplate = document.createElement('div');
+    cardTemplate.classList.add('card');
+    // Modify HTML using innerHTML
+    cardTemplate.innerHTML = ` 
+        <div class="card-content">
+        <img src="" alt="Card Image">
+        <h3>Card Title</h3>
+        </div>
+    `;
     function rotateHandler(evt) { // Create an event handler function to rotate the carousel
         var carousel = this.parentElement;
         if(carousel.classList.contains('card-carousel') === false){
@@ -32,6 +36,19 @@ function cardCarousel3d(carousels){
         var size = cards.length;
         var panelSize = inner.clientWidth;
         var translateZ = Math.round((panelSize / 2) / Math.tan(Math.Pi / size)) * 1.7;
+        while (inner.firstChild) {
+            inner.removeChild(inner.firstChild);
+        }
+      
+        // Add cards to the carousel
+        for (var j = 0; j < size; j++) {
+            var card = cardTemplate.cloneNode(true); // Use HTML templating with cloneNode method to create templated content. 
+            var img = card.querySelector('img');
+            img.src = "pictures/" + (j + 1) + ".jpg"; // Change the image source accordingly
+            img.width = "220";
+            img.height = "300";
+            inner.appendChild(card);
+        }
         var btnLeft = carousel.querySelector('.button-spin.counterclockwise');
         if(btnLeft !== null) {
             btnLeft.addEventListener("click", rotateHandler, false); // Event listener #1 rotate the carousel on click 
@@ -80,7 +97,7 @@ function cardCarousel3d(carousels){
                                 var password = prompt("Enter a new password for secured download:");
                                 checkPassword(password); //input with DOM event-based validation.
                             } else {
-                                alert("Continue the game.");
+                                alert("Continue choosing.");
                             }
                         }, 1000); // Delay alert
                     }
@@ -121,5 +138,3 @@ function cardCarousel3d(carousels){
   
 let result = document.querySelectorAll('.card-carousel')
 cardCarousel3d(result);
-
-
