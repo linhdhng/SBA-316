@@ -1,37 +1,15 @@
-// Cache at least one element using selectElementById.
-// Cache at least one element using querySelector or querySelectorAll.
 // Use the parent-child-sibling relationship to navigate between elements at least once (firstChild, lastChild, parentNode, nextElementSibling, etc.)
-// Iterate over a collection of elements to accomplish some task.
 //Create at least one element using createElement.
 // Use appendChild and/or prepend to add new elements to the DOM.
 // Use the DocumentFragment interface or HTML templating with the cloneNode method to create templated content. 
 // Modify the HTML or text content of at least one element in response to user interaction using innerHTML, innerText, or textContent.
 // Modify the style and/or CSS classes of an element in response to user interactions using the style or classList properties.
 // Modify at least one attribute of an element in response to user interaction.
-// Register at least two different event listeners and create the associated event handler functions.
-// Use at least two Browser Object Model (BOM) properties or methods.
 // Include at least one form and/or input with HTML attribute validation.
 // Include at least one form and/or input with DOM event-based validation. (This can be the same form or input as the one above, but should include event-based validation in addition to the HTML attribute validation.)
-// Ensure that the program runs without errors (comment out things that do not work, and explain your blockers - you can still receive partial credit).
-
-// Cache at least one element using selectElementById.
-// Cache at least one element using querySelector or querySelectorAll.
-// Use the parent-child-sibling relationship to navigate between elements at least once (firstChild, lastChild, parentNode, nextElementSibling, etc.)
-// Iterate over a collection of elements to accomplish some task.
-//Create at least one element using createElement.
-// Use appendChild and/or prepend to add new elements to the DOM.
-// Use the DocumentFragment interface or HTML templating with the cloneNode method to create templated content. 
-// Modify the HTML or text content of at least one element in response to user interaction using innerHTML, innerText, or textContent.
-// Modify the style and/or CSS classes of an element in response to user interactions using the style or classList properties.
-// Modify at least one attribute of an element in response to user interaction.
-// Register at least two different event listeners and create the associated event handler functions.
-// Use at least two Browser Object Model (BOM) properties or methods.
-// Include at least one form and/or input with HTML attribute validation.
-// Include at least one form and/or input with DOM event-based validation. (This can be the same form or input as the one above, but should include event-based validation in addition to the HTML attribute validation.)
-// Ensure that the program runs without errors (comment out things that do not work, and explain your blockers - you can still receive partial credit).
 
 function cardCarousel3d(carousels){
-    var rotateHandler = function(evt) {
+    function rotateHandler(evt) { // Create an event handler function to rotate the carousel
       var carousel = this.parentElement;
       if(carousel.classList.contains('card-carousel') === false){
         var carousel = carousel.parentElement;
@@ -48,11 +26,11 @@ function cardCarousel3d(carousels){
     for(var i = 0; i < carousels.length; i++) {
         let carousel = carousels[i];
         let inner = carousel.querySelector('.inner-carousel');
-        let cards = carousel.querySelectorAll('.inner-carousel > div');
+        let cards = carousel.querySelectorAll('.inner-carousel > div'); // Cache element using querySelectorAll
         var size = cards.length;
         var btnLeft = carousel.querySelector('.button-spin.counterclockwise');
         if(btnLeft !== null) {
-            btnLeft.addEventListener("click", rotateHandler, false);
+            btnLeft.addEventListener("click", rotateHandler, false); // Event listener #1 rotate the carousel on click 
         }
         var btnRight = carousel.querySelector('.button-spin.clockwise');
         if(btnRight !== null) {
@@ -86,12 +64,15 @@ function cardCarousel3d(carousels){
             child.classList.add('front');
             } else if (zz === ry || zz === -360 + ry) {
                 child.classList.add('clockwise');
-                child.addEventListener("click", function() {
-                    if (this.id === 'signature') {
-                      alert('You got the GOLDEN CARD!');
-                    }
-                    rotateHandler.call(this); // Call rotateHandler after the alert
-                    }, false);
+                child.addEventListener("click", function() { // Event listener #2 with handler function to create an alert when the signed card appears
+                    let card = this;
+                    rotateHandler.call(card) // Call rorateHandler to rotate the carousel first
+                    setTimeout(function() { // BOM method #1
+                        if (card.id === 'signature') {
+                            alert('YOU GOT A SIGNED CARD!'); // BOM method #2
+                        }
+                    }, 500); // Delay alert
+                }, false);
             } else if (zz === 360 - ry || zz === 0 - ry) {
                 child.classList.add('counterclockwise');
                 child.addEventListener("click", rotateHandler, false);
@@ -100,5 +81,6 @@ function cardCarousel3d(carousels){
     }
 }
   
-  cardCarousel3d(document.querySelectorAll('.card-carousel'));
+let result = document.querySelectorAll('.card-carousel')
+cardCarousel3d(result);
 
