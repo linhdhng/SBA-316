@@ -12,6 +12,11 @@ If the user choose to download, another prompt that includes a form validation w
   <li>Implement basic form validation using any combination of built-in HTML validation attributes and DOM-event-driven JavaScript validation.</li>
 </ul>
 
+<h4>Language Used</h4>
+<ul>
+  <li>HTML/CSS</li>
+  <li>JAVASCRIPT</li>
+</ul>
 <h4>Areas of Improvement</h4>
 <ul>
   <li>Have the cards flipped when anchor tag button is clicked</li>
