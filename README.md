@@ -7,9 +7,9 @@ If the user choose to download, another prompt that includes a form validation w
 <h4>Objective Achieved</h4>
 <ul>
   <li>Used DOM properties, methods, and techniques to create a web application that provides a dynamic user experience.</li>
-  <li>Use BOM properties, methods, and techniques to facilitate creation of a dynamic web application.</li>
-  <li>Demonstrate proficiency with event-driven programming and DOM events.</li>
-  <li>Implement basic form validation using any combination of built-in HTML validation attributes and DOM-event-driven JavaScript validation.</li>
+  <li>Used BOM properties, methods, and techniques to facilitate creation of a dynamic web application.</li>
+  <li>Demonstrated proficiency with event-driven programming and DOM events.</li>
+  <li>Implemented basic form validation using any combination of built-in HTML validation attributes and DOM-event-driven JavaScript validation.</li>
 </ul>
 
 <h4>Language Used</h4>
