@@ -1,17 +1,41 @@
-// Use the parent-child-sibling relationship to navigate between elements at least once (firstChild, lastChild, parentNode, nextElementSibling, etc.)
-// Modify the style and/or CSS classes of an element in response to user interactions using the style or classList properties.
-// Modify at least one attribute of an element in response to user interaction.
 
 function cardCarousel3d(carousels){
-    var cardTemplate = document.createElement('div');
-    cardTemplate.classList.add('card');
-    // Modify HTML using innerHTML
-    cardTemplate.innerHTML = ` 
-        <div class="card-content">
-        <img src="" alt="Card Image">
-        <h3>Card Title</h3>
-        </div>
+    // Template for the navigation bar
+    var navBarTemplate = document.createElement('div');
+    navBarTemplate.classList.add('navigation-bar');
+    navBarTemplate.innerHTML = `
+        <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+        </ul>
+        </nav>
     `;
+    // Create a DocumentFragment to hold the navigation bar
+    var fragment = document.createDocumentFragment();
+    // Clone the navigation bar template and append it to the fragment
+    var navBar = navBarTemplate.cloneNode(true);
+    fragment.appendChild(navBar);
+    // Append the fragment to the document body
+    document.body.prepend(fragment);
+    //On click, the card will show a video
+    document.addEventListener("DOMContentLoaded", function() {
+        var flipCards = document.querySelectorAll('.flip-card');
+    
+        flipCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                var videoSrc = this.getAttribute('data-video-src');
+                var parentCard = this.parentElement;
+                parentCard.classList.toggle('flipped');
+    
+                if (parentCard.classList.contains('flipped')) {
+                    setTimeout(function() {
+                        parentCard.innerHTML = '<video width="220" height="300" controls><source src="' + videoSrc + '" type="video/mp4"></video>';
+                    }, 500); // Adjust timing if needed
+                }
+            });
+        });
+    });
+    
     function rotateHandler(evt) { // Create an event handler function to rotate the carousel
         var carousel = this.parentElement;
         if(carousel.classList.contains('card-carousel') === false){
@@ -36,19 +60,6 @@ function cardCarousel3d(carousels){
         var size = cards.length;
         var panelSize = inner.clientWidth;
         var translateZ = Math.round((panelSize / 2) / Math.tan(Math.Pi / size)) * 1.7;
-        while (inner.firstChild) {
-            inner.removeChild(inner.firstChild);
-        }
-      
-        // Add cards to the carousel
-        for (var j = 0; j < size; j++) {
-            var card = cardTemplate.cloneNode(true); // Use HTML templating with cloneNode method to create templated content. 
-            var img = card.querySelector('img');
-            img.src = "pictures/" + (j + 1) + ".jpg"; // Change the image source accordingly
-            img.width = "220";
-            img.height = "300";
-            inner.appendChild(card);
-        }
         var btnLeft = carousel.querySelector('.button-spin.counterclockwise');
         if(btnLeft !== null) {
             btnLeft.addEventListener("click", rotateHandler, false); // Event listener #1 rotate the carousel on click 
@@ -99,7 +110,7 @@ function cardCarousel3d(carousels){
                             } else {
                                 alert("Continue choosing.");
                             }
-                        }, 1000); // Delay alert
+                        }, 500); // Delay alert
                     }
                 }, false);
             } else if (zz === 360 - ry || zz === 0 - ry) {
